@@ -30,8 +30,8 @@ import Video1 from "./assets/images/IMG_1138.MP4";
 import Video2 from "./assets/images/IMG_1145.MP4";
 import Video3 from "./assets/images/IMG_1161.MP4";
 import Video4 from "./assets/images/IMG_1166.MP4";
-import Video5 from "./assets/images/third-vid-1.MP4";
-import Video6 from "./assets/images/third-vid-2.MP4";
+import Video5 from "./assets/images/third-vid-1.mp4";
+import Video6 from "./assets/images/third-vid-2.mp4";
 import EnchantedPuzzle from "./assets/images/Enchanted.JPEG";
 
 function App() {
