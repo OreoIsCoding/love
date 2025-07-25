@@ -38,8 +38,9 @@ function LovePuzzle({ imageSrc }) {
       currentPosition: index,
       style: {
         backgroundImage: `url(${imageSrc})`,
-        backgroundSize: '300%',
-        backgroundPosition: `${(index % 3) * 50}% ${Math.floor(index / 3) * 50}%`
+        backgroundSize: '300% 300%',
+        backgroundPosition: `${(index % 3) * 50}% ${Math.floor(index / 3) * 50}%`,
+        backgroundRepeat: 'no-repeat'
       }
     }));
 
@@ -138,69 +139,89 @@ function LovePuzzle({ imageSrc }) {
   };
 
   return (
-    <div className="relative">
-      <h2 className="text-2xl sm:text-3xl font-medium text-rose-800 mb-6">Love Puzzle</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
-        {/* Reference Image */}
-        <div className="relative aspect-square rounded-lg overflow-hidden shadow-xl group">
-          <img 
-            src={imageSrc} 
-            alt="Reference Image" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <p className="absolute bottom-2 left-1/2 -translate-x-1/2 text-sm text-white bg-black/40 px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Reference Image
-          </p>
-          {completed && (
-            <div className="absolute inset-0 bg-rose-400/20 animate-pulse-slow">
-              <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-medium px-4 py-2 bg-rose-500/80 rounded-full shadow-lg">
-                Completed! ✨
-              </p>
-            </div>
-          )}
+    <div className="relative max-w-2xl mx-auto">
+      <div className="flex flex-col items-center">
+        <div className="relative mb-8">
+          <h2 className="text-2xl sm:text-3xl font-medium text-rose-800 text-center">Love Puzzle</h2>
+          <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-rose-300/50 to-transparent"></div>
         </div>
 
-        {/* Puzzle Grid */}
-        <div className="relative aspect-square">
-          <div className="grid grid-cols-3 gap-0.5 bg-rose-300/20 p-0.5 rounded-lg shadow-xl">
-            {pieces.map((piece, index) => (
-              piece.id === 8 ? (
-                <div key={piece.id} className="aspect-square bg-white/10" />
-              ) : (
-                <button
-                  key={piece.id}
-                  onClick={() => handlePieceClick(index)}
-                  onTouchStart={(e) => handleTouchStart(e, index)}
-                  onTouchEnd={(e) => handleTouchEnd(e, index)}
-                  className={`
-                    aspect-square transition-all duration-300 relative
-                    ${isValidMove(index) && !completed ? 'hover:scale-95 cursor-pointer' : 'cursor-default'}
-                    ${touchStart?.index === index ? 'scale-95 opacity-80' : ''}
-                    ${completed ? 'ring-2 ring-rose-400' : ''}
-                    touch-none bg-white/5 backdrop-blur-sm
-                  `}
-                  style={piece.style}
-                >
-                  {isMobile && isValidMove(index) && !completed && (
-                    <div className="absolute inset-0 bg-rose-400/10 animate-pulse"></div>
-                  )}
-                </button>
-              )
-            ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full">
+          {/* Reference Image */}
+          <div className="relative w-full aspect-square rounded-xl overflow-hidden shadow-2xl group mx-auto transform transition-all duration-500 hover:scale-[1.02]" 
+               style={{ maxWidth: "300px", perspective: "1000px" }}>
+            <div className="absolute inset-0 bg-gradient-to-br from-rose-200/20 to-pink-200/20 opacity-50"></div>
+            <img 
+              src={imageSrc} 
+              alt="Reference Image" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+            <p className="absolute bottom-3 left-1/2 -translate-x-1/2 text-sm text-white bg-black/60 backdrop-blur-sm px-4 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 shadow-lg">
+              Complete the Puzzle ✨
+            </p>
+            {completed && (
+              <div className="absolute inset-0 bg-gradient-to-r from-rose-500/20 to-pink-500/20 animate-pulse-slow">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <p className="text-white font-medium px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-500 rounded-full shadow-xl transform hover:scale-105 transition-transform">
+                    Completed! 🎉
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Puzzle Grid */}
+          <div className="relative w-full aspect-square mx-auto" style={{ maxWidth: "300px" }}>
+            <div className="absolute inset-0 bg-gradient-to-br from-rose-200/20 to-pink-200/20 rounded-xl -m-1"></div>
+            <div className="relative grid grid-cols-3 gap-1 bg-white/10 p-1.5 rounded-xl shadow-xl backdrop-blur-sm">
+              {pieces.map((piece, index) => (
+                piece.id === 8 ? (
+                  <div key={piece.id} className="aspect-square bg-white/5 rounded-lg transition-all duration-300" />
+                ) : (
+                  <button
+                    key={piece.id}
+                    onClick={() => handlePieceClick(index)}
+                    onTouchStart={(e) => handleTouchStart(e, index)}
+                    onTouchEnd={(e) => handleTouchEnd(e, index)}
+                    className={`
+                      aspect-square transition-all duration-300 relative rounded-lg overflow-hidden
+                      ${isValidMove(index) && !completed ? 'hover:scale-95 cursor-pointer hover:shadow-lg hover:brightness-110' : 'cursor-default'}
+                      ${touchStart?.index === index ? 'scale-95 brightness-90' : ''}
+                      ${completed ? 'ring-2 ring-rose-400 shadow-lg' : 'shadow-md'}
+                      touch-none bg-white/10 backdrop-blur-sm transform hover:z-10
+                    `}
+                    style={{
+                      ...piece.style,
+                      boxShadow: isValidMove(index) && !completed ? '0 0 15px rgba(244, 63, 94, 0.2)' : ''
+                    }}
+                  >
+                    {(isValidMove(index) && !completed) && (
+                      <div className="absolute inset-0 bg-gradient-to-br from-rose-400/10 to-pink-400/10 animate-pulse"></div>
+                    )}
+                  </button>
+                )
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       {showQuote && (
-        <div className="animate-fade-in text-center space-y-4 mt-8">
-          <p className="text-xl text-rose-700 italic">
-            "Like these puzzle pieces finding their perfect place, we found each other and made our love story complete."
-          </p>
-          <div className="flex justify-center items-center gap-2">
-            <div className="w-16 h-px bg-gradient-to-r from-transparent via-rose-300 to-transparent"></div>
-            <div className="w-2 h-2 rounded-full bg-rose-300"></div>
-            <div className="w-16 h-px bg-gradient-to-r from-transparent via-rose-300 to-transparent"></div>
+        <div className="animate-fade-in text-center space-y-6 mt-12">
+          <div className="relative">
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-2xl">✨</div>
+            <div className="relative bg-white/30 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-rose-200/30 transform hover:scale-[1.02] transition-transform duration-500">
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-rose-200/10 to-pink-200/10 rounded-2xl"></div>
+              <p className="relative text-xl text-rose-700 italic leading-relaxed">
+                "Like these puzzle pieces finding their perfect place, we found each other and made our love story complete."
+              </p>
+              <div className="flex justify-center items-center gap-3 mt-4">
+                <div className="w-20 h-px bg-gradient-to-r from-transparent via-rose-300 to-transparent"></div>
+                <div className="text-rose-400">❤️</div>
+                <div className="w-20 h-px bg-gradient-to-r from-transparent via-rose-300 to-transparent"></div>
+              </div>
+            </div>
           </div>
         </div>
       )}
