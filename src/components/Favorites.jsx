@@ -2,7 +2,9 @@ import React from 'react';
 import Bakugo1 from '../assets/images/Bakugo1.jpeg';
 import giyu from '../assets/images/Giyu.jpg';
 import wonwoo from '../assets/images/wonwoo.jpg';
- import levi from '../assets/images/Levi.jpg';
+import levi from '../assets/images/Levi.jpg';
+import gojo from '../assets/images/Gojo.jpg';
+
 
  const style = document.createElement('style');
 style.textContent = `
@@ -28,6 +30,17 @@ document.head.appendChild(style);
 
 function Favorites() {
   const favorites = [
+    {
+      nameEn: "Gojo Satoru",
+      image: gojo,
+      title: "The Strongest Sorcerer",
+      role: "Special Grade Jujutsu Sorcerer",
+      series: "Jujutsu Kaisen",
+      color: "from-sky-400/20 to-white/30",
+      textColor: "text-sky-800",
+      borderColor: "border-sky-300",
+      glowColor: "sky"
+    },
     {
       nameEn: "Giyu Tomioka",
       image: giyu,
@@ -132,55 +145,56 @@ function Favorites() {
               </div>
 
               {/* Character Information - Left Side */}
-              <div className="absolute left-8 top-1/2 -translate-y-1/2 flex flex-col items-start z-30 max-w-[60%]">
-                {/* Character Name */}
-                <h3 className={`text-3xl sm:text-4xl font-bold mb-3 ${character.textColor}
-                              drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]
-                              background-clip-text`}>
-                  {character.nameEn}
+              {/* Large Background Text */}
+              <div className="absolute inset-0 flex items-center justify-center z-10 overflow-hidden pointer-events-none select-none">
+                <h3 className={`text-[6rem] sm:text-[10rem] font-black ${character.textColor} opacity-[0.06] transform 
+                              whitespace-nowrap text-center leading-none tracking-tight`}
+                    style={{ letterSpacing: '-0.05em' }}>
+                  {character.nameEn.split(' ')[0]}
                 </h3>
+              </div>
 
-                {/* Title with Special Character */}
-                <div className={`mb-2 border-b border-${character.glowColor}-300/30 pb-2`}>
-                  <p className={`text-lg sm:text-xl font-medium ${character.textColor} opacity-90
-                               drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]`}>
+              {/* Character Info - Centered */}
+              <div className="absolute bottom-2 left-0 right-0 z-30 px-4 text-center">
+                <div className="bg-white/90 backdrop-blur-sm rounded-lg p-1 sm:p-2 inline-block max-w-[70%] mx-auto
+                              shadow-lg transform transition-all duration-300 group-hover:scale-105">
+                  {/* Character Name */}
+                  <h3 className={`text-base sm:text-lg font-bold leading-tight ${character.textColor}
+                                drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]`}>
+                    {character.nameEn}
+                  </h3>
+
+                  {/* Title */}
+                  <p className={`text-[10px] sm:text-xs font-medium ${character.textColor} opacity-90`}>
                     {character.title}
+                    {character.subTitle && (
+                      <span className="block text-[8px] sm:text-[10px] opacity-75">
+                        {character.subTitle}
+                      </span>
+                    )}
                   </p>
-                  {character.subTitle && (
-                    <p className={`text-sm sm:text-base ${character.textColor} opacity-75
-                                 mt-1`}>
-                      {character.subTitle}
-                    </p>
-                  )}
-                </div>
 
-                {/* Role and Series */}
-                <div className={`flex flex-col gap-1`}>
-                  <p className={`text-sm sm:text-base ${character.textColor} opacity-85
-                                font-medium`}>
-                    {character.role}
-                  </p>
-                  <p className={`text-sm ${character.textColor} opacity-75
-                                tracking-wider`}>
+                  {/* Series */}
+                  <p className={`text-[8px] sm:text-[10px] ${character.textColor} opacity-75 tracking-wider`}>
                     {character.series}
                   </p>
                 </div>
               </div>
 
               {/* Character Standee Image - Centered */}
-              <div className="absolute left-1/2 -translate-x-1/2 bottom-0 h-[260px] sm:h-[320px] z-20
-                            transform transition-all duration-500 group-hover:scale-105 group-hover:translate-y-[-8px]">
+              <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 h-[280px] sm:h-[340px] z-20
+                            transform transition-all duration-500 group-hover:scale-[1.03]">
                 {/* Background Removal Effect Container */}
                 <div className="relative h-full aspect-[3/4]">
                   {/* Main Character Image with Blend Mode */}
                   <div className="relative h-full w-full">
                     <img 
                       src={character.image}
-                      alt={character.name}
+                      alt={character.nameEn}
                       className="h-full w-full object-cover scale-[1.02]"
                       style={{
-                        maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0))',
-                        WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0))',
+                        maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0.7))',
+                        WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0.7))',
                         mixBlendMode: 'multiply',
                       }}
                     />
@@ -191,8 +205,8 @@ function Favorites() {
                       alt=""
                       className="absolute inset-0 h-full w-full object-cover scale-[1.01] opacity-70"
                       style={{
-                        maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0))',
-                        WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0))',
+                        maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0.7))',
+                        WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0.7))',
                         filter: 'blur(4px) brightness(1.1)',
                         mixBlendMode: 'screen',
                       }}
