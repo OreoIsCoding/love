@@ -29,11 +29,9 @@ document.head.appendChild(style);
 function Favorites() {
   const favorites = [
     {
-      firstName: "冨岡",
-      lastName: "義勇",
       nameEn: "Giyu Tomioka",
       image: giyu,
-      title: "Water Hashira • 水柱",
+      title: "Water Hashira",
       role: "Demon Slayer Corps",
       series: "Demon Slayer",
       color: "from-blue-500/20 to-cyan-500/20",
@@ -42,11 +40,9 @@ function Favorites() {
       glowColor: "blue"
     },
     {
-      firstName: "リヴァイ",
-      lastName: "アッカーマン",
       nameEn: "Levi Ackerman",
       image: levi,
-      title: "Captain • 兵長",
+      title: "Captain",
       role: "Scout Regiment Commander",
       series: "Attack on Titan",
       color: "from-slate-500/20 to-gray-500/20",
@@ -55,11 +51,10 @@ function Favorites() {
       glowColor: "slate"
     },
     {
-      firstName: "爆豪",
-      lastName: "勝己",
       nameEn: "Bakugo Katsuki",
       image: Bakugo1,
-      title: "Great Explosion Murder God Dynamight",
+      title: "Great Explosion Murder God",
+      subTitle: "Dynamight",
       role: "Pro Hero",
       series: "My Hero Academia",
       color: "from-orange-500/20 to-red-500/20",
@@ -68,11 +63,9 @@ function Favorites() {
       glowColor: "orange"
     },
     {
-      firstName: "전",
-      lastName: "원우",
       nameEn: "Jeon Wonwoo",
       image: wonwoo,
-      title: "Main Vocalist • 메인보컬",
+      title: "Sub Vocalist",
       role: "Lead Rapper, Sub Vocalist",
       series: "SEVENTEEN",
       color: "from-indigo-500/20 to-violet-500/20",
@@ -140,14 +133,7 @@ function Favorites() {
 
               {/* Character Information - Left Side */}
               <div className="absolute left-8 top-1/2 -translate-y-1/2 flex flex-col items-start z-30 max-w-[60%]">
-                {/* Original Name */}
-                <div className="mb-1">
-                  <h3 className={`text-lg sm:text-xl font-medium ${character.textColor} opacity-90`}>
-                    {character.firstName} {character.lastName}
-                  </h3>
-                </div>
-                
-                {/* English Name */}
+                {/* Character Name */}
                 <h3 className={`text-3xl sm:text-4xl font-bold mb-3 ${character.textColor}
                               drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]
                               background-clip-text`}>
@@ -155,11 +141,18 @@ function Favorites() {
                 </h3>
 
                 {/* Title with Special Character */}
-                <p className={`text-lg sm:text-xl font-medium mb-2 ${character.textColor} opacity-90
-                             drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]
-                             border-b border-${character.glowColor}-300/30 pb-2`}>
-                  {character.title}
-                </p>
+                <div className={`mb-2 border-b border-${character.glowColor}-300/30 pb-2`}>
+                  <p className={`text-lg sm:text-xl font-medium ${character.textColor} opacity-90
+                               drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]`}>
+                    {character.title}
+                  </p>
+                  {character.subTitle && (
+                    <p className={`text-sm sm:text-base ${character.textColor} opacity-75
+                                 mt-1`}>
+                      {character.subTitle}
+                    </p>
+                  )}
+                </div>
 
                 {/* Role and Series */}
                 <div className={`flex flex-col gap-1`}>
