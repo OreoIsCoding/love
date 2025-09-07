@@ -11,6 +11,7 @@ import LetterModal from "./components/LetterModal";
 import LockScreen from "./components/LockScreen";
 import MusicPlayer from "./components/MusicPlayer";
 import LovePuzzle from "./components/LovePuzzle";
+import Favorites from "./components/Favorites";
 import OurSong from "./assets/mp3/Taylor Swift - Lover.mp3";
 import Cover from "./assets/images/Cover-music.jfif";
 import Photo1 from "./assets/images/first1.JPEG";
@@ -185,8 +186,10 @@ function App() {
                     artist="Taylor Swift"
                   />
                 </section>
-              </FadeInSection>             
-               <FadeInSection>
+              </FadeInSection>
+
+          
+              <FadeInSection>
                 <section className="group hover:scale-[1.02] transition-all duration-300 bg-gradient-to-br from-white/40 to-white/20 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-xl border-2 border-rose-200/50 hover:border-rose-300/70 hover:shadow-rose-200/30 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-rose-100/10 to-pink-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute top-0 right-0 w-32 h-32 bg-rose-200/20 rounded-full blur-3xl -translate-y-16 translate-x-16 group-hover:bg-rose-300/30 transition-colors duration-300" />
@@ -242,6 +245,20 @@ function App() {
                 </div>
               </section>
                 </FadeInSection>
+                   
+                   
+                    <FadeInSection>
+                <section className="group hover:scale-[1.02] transition-all duration-300 bg-gradient-to-br from-white/40 to-white/20 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-xl border-2 border-rose-200/50 hover:border-rose-300/70 hover:shadow-rose-200/30 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-rose-100/10 to-pink-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  {/* Corner decorations */}
+                  <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-rose-300/50 group-hover:border-rose-400/60 transition-colors"></div>
+                  <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-rose-300/50 group-hover:border-rose-400/60 transition-colors"></div>
+                  <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-rose-300/50 group-hover:border-rose-400/60 transition-colors"></div>
+                  <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-rose-300/50 group-hover:border-rose-400/60 transition-colors"></div>
+                  <Favorites />
+                </section>
+              </FadeInSection>             
+
 
 
                 <FadeInSection>
@@ -293,6 +310,7 @@ function App() {
               </section>
               </FadeInSection>
             </div>
+            
           </div>
         </div>
       )}

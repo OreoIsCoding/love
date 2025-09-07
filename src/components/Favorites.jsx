@@ -1,0 +1,237 @@
+import React from 'react';
+import Bakugo1 from '../assets/images/Bakugo1.jpeg';
+import giyu from '../assets/images/Giyu.jpg';
+import wonwoo from '../assets/images/wonwoo.jpg';
+ import levi from '../assets/images/Levi.jpg';
+
+ const style = document.createElement('style');
+style.textContent = `
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .animate-float {
+    animation: float infinite;
+  }
+  
+  .bg-radial-gradient {
+    background: radial-gradient(
+      circle at center,
+      rgba(255,255,255,0.2) 0%,
+      rgba(255,255,255,0.1) 20%,
+      transparent 70%
+    );
+  }
+`;
+document.head.appendChild(style);
+
+function Favorites() {
+  const favorites = [
+    {
+      firstName: "冨岡",
+      lastName: "義勇",
+      nameEn: "Giyu Tomioka",
+      image: giyu,
+      title: "Water Hashira • 水柱",
+      role: "Demon Slayer Corps",
+      series: "Demon Slayer",
+      color: "from-blue-500/20 to-cyan-500/20",
+      textColor: "text-blue-800",
+      borderColor: "border-blue-300",
+      glowColor: "blue"
+    },
+    {
+      firstName: "リヴァイ",
+      lastName: "アッカーマン",
+      nameEn: "Levi Ackerman",
+      image: levi,
+      title: "Captain • 兵長",
+      role: "Scout Regiment Commander",
+      series: "Attack on Titan",
+      color: "from-slate-500/20 to-gray-500/20",
+      textColor: "text-slate-800",
+      borderColor: "border-slate-300",
+      glowColor: "slate"
+    },
+    {
+      firstName: "爆豪",
+      lastName: "勝己",
+      nameEn: "Bakugo Katsuki",
+      image: Bakugo1,
+      title: "Great Explosion Murder God Dynamight",
+      role: "Pro Hero",
+      series: "My Hero Academia",
+      color: "from-orange-500/20 to-red-500/20",
+      textColor: "text-orange-800",
+      borderColor: "border-orange-300",
+      glowColor: "orange"
+    },
+    {
+      firstName: "전",
+      lastName: "원우",
+      nameEn: "Jeon Wonwoo",
+      image: wonwoo,
+      title: "Main Vocalist • 메인보컬",
+      role: "Lead Rapper, Sub Vocalist",
+      series: "SEVENTEEN",
+      color: "from-indigo-500/20 to-violet-500/20",
+      textColor: "text-indigo-800",
+      borderColor: "border-indigo-300",
+      glowColor: "indigo"
+    }
+  ];
+
+  return (
+    <div className="w-full">
+      <div className="relative mb-12">
+        <h2 className="text-2xl sm:text-3xl font-medium text-rose-800 text-center">Anya's Husbands</h2>
+        <p className="text-rose-600/80 text-center mt-2 text-sm sm:text-base">
+          (Aside from me)
+        </p>
+        <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-rose-300/50 to-transparent"></div>
+      </div>
+
+      <div className="flex flex-col gap-8">
+        {favorites.map((character, index) => (
+          <div 
+            key={index}
+            className="group relative"
+          >
+            {/* Character Banner */}
+            <div className={`
+              relative h-[300px] sm:h-[400px] w-full rounded-xl overflow-hidden
+              shadow-lg transform transition-all duration-500
+              hover:scale-[1.02] cursor-pointer
+            `}>
+              {/* Banner Background with Dynamic Gradient */}
+              <div className={`
+                absolute inset-0 bg-gradient-to-r ${character.color}
+                opacity-90 transition-opacity duration-300
+              `}></div>
+              
+              {/* Radial Gradient for Character Spotlight */}
+              <div className="absolute inset-0 bg-radial-gradient opacity-70"></div>
+
+              {/* Dynamic Background Pattern */}
+              <div className="absolute inset-0 opacity-10"
+                   style={{
+                     backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23000000' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+                     backgroundSize: '100px 100px'
+                   }}></div>
+              
+              {/* Animated Particles Effect */}
+              <div className="absolute inset-0 overflow-hidden">
+                {[...Array(20)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute rounded-full bg-white/30 animate-float"
+                    style={{
+                      width: `${Math.random() * 4 + 2}px`,
+                      height: `${Math.random() * 4 + 2}px`,
+                      left: `${Math.random() * 100}%`,
+                      top: `${Math.random() * 100}%`,
+                      animationDelay: `${Math.random() * 5}s`,
+                      animationDuration: `${Math.random() * 3 + 2}s`
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* Character Information - Left Side */}
+              <div className="absolute left-8 top-1/2 -translate-y-1/2 flex flex-col items-start z-30 max-w-[60%]">
+                {/* Original Name */}
+                <div className="mb-1">
+                  <h3 className={`text-lg sm:text-xl font-medium ${character.textColor} opacity-90`}>
+                    {character.firstName} {character.lastName}
+                  </h3>
+                </div>
+                
+                {/* English Name */}
+                <h3 className={`text-3xl sm:text-4xl font-bold mb-3 ${character.textColor}
+                              drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]
+                              background-clip-text`}>
+                  {character.nameEn}
+                </h3>
+
+                {/* Title with Special Character */}
+                <p className={`text-lg sm:text-xl font-medium mb-2 ${character.textColor} opacity-90
+                             drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]
+                             border-b border-${character.glowColor}-300/30 pb-2`}>
+                  {character.title}
+                </p>
+
+                {/* Role and Series */}
+                <div className={`flex flex-col gap-1`}>
+                  <p className={`text-sm sm:text-base ${character.textColor} opacity-85
+                                font-medium`}>
+                    {character.role}
+                  </p>
+                  <p className={`text-sm ${character.textColor} opacity-75
+                                tracking-wider`}>
+                    {character.series}
+                  </p>
+                </div>
+              </div>
+
+              {/* Character Standee Image - Centered */}
+              <div className="absolute left-1/2 -translate-x-1/2 bottom-0 h-[260px] sm:h-[320px] z-20
+                            transform transition-all duration-500 group-hover:scale-105 group-hover:translate-y-[-8px]">
+                {/* Background Removal Effect Container */}
+                <div className="relative h-full aspect-[3/4]">
+                  {/* Main Character Image with Blend Mode */}
+                  <div className="relative h-full w-full">
+                    <img 
+                      src={character.image}
+                      alt={character.name}
+                      className="h-full w-full object-cover scale-[1.02]"
+                      style={{
+                        maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0))',
+                        WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0))',
+                        mixBlendMode: 'multiply',
+                      }}
+                    />
+                    
+                    {/* Duplicated Image for Depth Effect */}
+                    <img 
+                      src={character.image}
+                      alt=""
+                      className="absolute inset-0 h-full w-full object-cover scale-[1.01] opacity-70"
+                      style={{
+                        maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0))',
+                        WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0))',
+                        filter: 'blur(4px) brightness(1.1)',
+                        mixBlendMode: 'screen',
+                      }}
+                    />
+                  </div>
+
+                  {/* Enhanced Glow Effect */}
+                  <div className={`
+                    absolute -inset-4 blur-2xl opacity-30
+                    bg-gradient-to-t from-${character.glowColor}-400 via-${character.glowColor}-300 to-transparent
+                    transform scale-y-125
+                  `}></div>
+                </div>
+
+                {/* Reflective Floor Effect */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-gradient-to-t from-white/20 to-transparent
+                              backdrop-blur-sm rounded-full scale-y-50 transform -skew-x-12 opacity-60"></div>
+              </div>
+
+
+
+              {/* Decorative Elements */}
+              <div className={`absolute top-4 left-4 w-20 h-1 ${character.borderColor}`}></div>
+              <div className={`absolute top-4 left-4 w-1 h-20 ${character.borderColor}`}></div>
+              <div className={`absolute bottom-4 right-4 w-20 h-1 ${character.borderColor}`}></div>
+              <div className={`absolute bottom-4 right-4 w-1 h-20 ${character.borderColor}`}></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Favorites;
