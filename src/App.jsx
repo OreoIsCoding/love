@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import TimeCounter from "./components/TimeCounter";
 import FloatingHearts from "./components/FloatingHearts";
 import PhotoGallery from "./components/PhotoGallery";
+import PhotocardPreview from "./components/PhotocardPreview";
 import FadeInSection from "./components/FadeInSection";
 
 import LoveReasons from "./components/LoveReasons";
@@ -38,6 +39,7 @@ import EnchantedPuzzle from "./assets/images/Enchanted.JPEG";
 function App() {
   const [isLocked, setIsLocked] = useState(true);
   const [isLetterOpen, setIsLetterOpen] = useState(false);
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [timeTogether, setTimeTogether] = useState({
     days: 0,
     hours: 0,
@@ -102,6 +104,12 @@ function App() {
 
   return (
     <>
+      {selectedCharacter && (
+        <PhotocardPreview 
+          character={selectedCharacter} 
+          onClose={() => setSelectedCharacter(null)} 
+        />
+      )}
       {isLocked ? (
         <LockScreen onUnlock={() => setIsLocked(false)} />
       ) : (
@@ -255,7 +263,7 @@ function App() {
                   <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-rose-300/50 group-hover:border-rose-400/60 transition-colors"></div>
                   <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-rose-300/50 group-hover:border-rose-400/60 transition-colors"></div>
                   <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-rose-300/50 group-hover:border-rose-400/60 transition-colors"></div>
-                  <Favorites />
+                  <Favorites onSelectCharacter={setSelectedCharacter} />
                 </section>
               </FadeInSection>             
 

@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Bakugo1 from '../assets/images/Bakugo1.jpeg';
 import giyu from '../assets/images/Giyu.jpg';
 import wonwoo from '../assets/images/wonwoo.jpg';
 import levi from '../assets/images/Levi.jpg';
 import gojo from '../assets/images/Gojo.jpg';
+import sanemi from '../assets/images/sanemi.jpg';
+import todoroki from '../assets/images/todoroki.jpg';
+// import jay from '../assets/images/jay.jpg';
+import jin from '../assets/images/jin.jpg';
+import soobin from '../assets/images/soobin.jpg';
+
+// Import voice messages
+import giyuVoice from '../assets/mp3/tomioka.mp3';
+import gojoVoice from '../assets/mp3/gojo.mp3';
+import bakugoVoice from '../assets/mp3/bakugo.mp3';
+import wonwooVoice from '../assets/mp3/wonwoo.mp3';
+import leviVoice from '../assets/mp3/levi.mp3';
+import sanemiVoice from '../assets/mp3/sanemi.mp3';
+import todorokiVoice from '../assets/mp3/shoto.mp3';
+import jinVoice from '../assets/mp3/jin.mp3';
+import soobinVoice from '../assets/mp3/soobin.mp3';
 
 
  const style = document.createElement('style');
@@ -28,7 +44,9 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-function Favorites() {
+function Favorites({ onSelectCharacter }) {
+  const audioRef = useRef(null);
+
   const favorites = [
     {
       nameEn: "Gojo Satoru",
@@ -39,7 +57,8 @@ function Favorites() {
       color: "from-sky-400/20 to-white/30",
       textColor: "text-sky-800",
       borderColor: "border-sky-300",
-      glowColor: "sky"
+      glowColor: "sky",
+      voice: gojoVoice
     },
     {
       nameEn: "Giyu Tomioka",
@@ -50,7 +69,8 @@ function Favorites() {
       color: "from-blue-500/20 to-cyan-500/20",
       textColor: "text-blue-800",
       borderColor: "border-blue-300",
-      glowColor: "blue"
+      glowColor: "blue",
+      voice: giyuVoice
     },
     {
       nameEn: "Levi Ackerman",
@@ -61,7 +81,8 @@ function Favorites() {
       color: "from-slate-500/20 to-gray-500/20",
       textColor: "text-slate-800",
       borderColor: "border-slate-300",
-      glowColor: "slate"
+      glowColor: "slate",
+      voice: leviVoice
     },
     {
       nameEn: "Bakugo Katsuki",
@@ -73,7 +94,8 @@ function Favorites() {
       color: "from-orange-500/20 to-red-500/20",
       textColor: "text-orange-800",
       borderColor: "border-orange-300",
-      glowColor: "orange"
+      glowColor: "orange",
+      voice: bakugoVoice
     },
     {
       nameEn: "Jeon Wonwoo",
@@ -84,7 +106,67 @@ function Favorites() {
       color: "from-indigo-500/20 to-violet-500/20",
       textColor: "text-indigo-800",
       borderColor: "border-indigo-300",
-      glowColor: "indigo"
+      glowColor: "indigo",
+      voice: wonwooVoice
+    },
+    {
+      nameEn: "Sanemi Shinazugawa",
+      image: sanemi,
+      title: "Wind Hashira",
+      role: "Demon Slayer Corps",
+      series: "Demon Slayer",
+      color: "from-emerald-500/20 to-green-500/20",
+      textColor: "text-emerald-800",
+      borderColor: "border-emerald-300",
+      glowColor: "emerald",
+      voice: sanemiVoice
+    },
+    {
+      nameEn: "Shoto Todoroki",
+      image: todoroki,
+      title: "Half-Cold Half-Hot",
+      role: "Pro Hero",
+      series: "My Hero Academia",
+      color: "from-red-400/20 to-blue-400/20",
+      textColor: "text-red-800",
+      borderColor: "border-red-300",
+      glowColor: "red",
+      voice: todorokiVoice
+    },
+    // {
+    //   nameEn: "Jay Park",
+    //   image: jay,
+    //   title: "Main Dancer",
+    //   role: "Lead Dancer, Sub Vocalist",
+    //   series: "ENHYPEN",
+    //   color: "from-yellow-500/20 to-amber-500/20",
+    //   textColor: "text-amber-800",
+    //   borderColor: "border-amber-300",
+    //   glowColor: "amber"
+    // },
+    {
+      nameEn: "Jin",
+      image: jin,
+      title: "World Wide Handsome",
+      role: "Sub Vocalist",
+      series: "BTS",
+      color: "from-pink-400/20 to-rose-400/20",
+      textColor: "text-rose-800",
+      borderColor: "border-rose-300",
+      glowColor: "rose",
+      voice: jinVoice
+    },
+    {
+      nameEn: "Soobin",
+      image: soobin,
+      title: "Leader",
+      role: "Lead Vocalist",
+      series: "TOMORROW X TOGETHER",
+      color: "from-purple-400/20 to-violet-400/20",
+      textColor: "text-purple-800",
+      borderColor: "border-purple-300",
+      glowColor: "purple",
+      voice: soobinVoice
     }
   ];
 
@@ -98,17 +180,28 @@ function Favorites() {
         <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-rose-300/50 to-transparent"></div>
       </div>
 
-      <div className="flex flex-col gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
         {favorites.map((character, index) => (
           <div 
             key={index}
-            className="group relative"
+            className="group relative cursor-pointer"
+            onClick={() => {
+              if (character.voice) {
+                if (audioRef.current) {
+                  audioRef.current.src = character.voice;
+                  audioRef.current.loop = true;
+                  audioRef.current.currentTime = 0;
+                  audioRef.current.play();
+                }
+              }
+              onSelectCharacter(character);
+            }}
           >
             {/* Character Banner */}
             <div className={`
-              relative h-[300px] sm:h-[400px] w-full rounded-xl overflow-hidden
+              relative h-[160px] xs:h-[180px] sm:h-[200px] md:h-[220px] lg:h-[240px] w-full rounded-xl overflow-hidden
               shadow-lg transform transition-all duration-500
-              hover:scale-[1.02] cursor-pointer
+              hover:scale-[1.05] cursor-pointer
             `}>
               {/* Banner Background with Dynamic Gradient */}
               <div className={`
@@ -155,34 +248,35 @@ function Favorites() {
               </div>
 
               {/* Character Info - Centered */}
-              <div className="absolute bottom-2 left-0 right-0 z-30 px-4 text-center">
-                <div className="bg-white/90 backdrop-blur-sm rounded-lg p-1 sm:p-2 inline-block max-w-[70%] mx-auto
+              <div className="absolute bottom-1 left-0 right-0 z-30 px-2 text-center">
+                <div className="bg-white/90 backdrop-blur-sm rounded-lg p-0.5 sm:p-1 inline-block max-w-[60%] mx-auto
                               shadow-lg transform transition-all duration-300 group-hover:scale-105">
                   {/* Character Name */}
-                  <h3 className={`text-base sm:text-lg font-bold leading-tight ${character.textColor}
+                  <h3 className={`text-xs sm:text-sm md:text-base font-bold leading-tight ${character.textColor}
                                 drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]`}>
-                    {character.nameEn}
+                    {character.nameEn.split(' ')[0]}
                   </h3>
 
                   {/* Title */}
-                  <p className={`text-[10px] sm:text-xs font-medium ${character.textColor} opacity-90`}>
+                  <p className={`text-[8px] xs:text-[9px] sm:text-[10px] md:text-[11px] font-medium ${character.textColor} opacity-90`}>
                     {character.title}
                     {character.subTitle && (
-                      <span className="block text-[8px] sm:text-[10px] opacity-75">
+                      <span className="block text-[6px] xs:text-[7px] sm:text-[8px] md:text-[9px] opacity-75">
                         {character.subTitle}
                       </span>
                     )}
                   </p>
 
                   {/* Series */}
-                  <p className={`text-[8px] sm:text-[10px] ${character.textColor} opacity-75 tracking-wider`}>
+                  <p className={`text-[6px] xs:text-[7px] sm:text-[8px] md:text-[9px] ${character.textColor} opacity-75 tracking-wider`}>
                     {character.series}
                   </p>
                 </div>
               </div>
 
               {/* Character Standee Image - Centered */}
-              <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 h-[280px] sm:h-[340px] z-20
+              <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 
+                            h-[140px] xs:h-[160px] sm:h-[180px] md:h-[200px] lg:h-[220px] z-20
                             transform transition-all duration-500 group-hover:scale-[1.03]">
                 {/* Background Removal Effect Container */}
                 <div className="relative h-full aspect-[3/4]">
@@ -237,6 +331,12 @@ function Favorites() {
           </div>
         ))}
       </div>
+
+      {/* Audio Element */}
+      <audio 
+        ref={audioRef}
+        className="hidden"
+      />
     </div>
   );
 }
